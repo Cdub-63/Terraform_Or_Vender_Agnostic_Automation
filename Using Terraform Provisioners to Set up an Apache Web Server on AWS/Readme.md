@@ -48,6 +48,8 @@ Initialize the Terraform working directory and download the required providers:
 terraform init
 ```
 
+![image](https://user-images.githubusercontent.com/44756128/116885460-86142c80-abed-11eb-9bef-0f82637bec9a.png)
+
 Validate the code to look for any errors in syntax, parameters, or attributes within Terraform resources that may prevent it from deploying correctly:
 ```sh
 terraform validate
@@ -55,10 +57,14 @@ terraform validate
 
 You should receive a notification that the configuration is valid.
 
+![image](https://user-images.githubusercontent.com/44756128/116885569-a348fb00-abed-11eb-86b7-691b86a1d111.png)
+
 Review the actions that will be performed when you deploy the Terraform code:
 ```sh
 terraform plan
 ```
+
+![image](https://user-images.githubusercontent.com/44756128/116885606-acd26300-abed-11eb-886c-b34dbe062d39.png)
 
 In this case, it will create 7 resources as configured in the Terraform code.
 
@@ -67,12 +73,21 @@ Deploy the code:
 terraform apply
 ```
 
+![image](https://user-images.githubusercontent.com/44756128/116885772-e1461f00-abed-11eb-994f-2d53410b00c9.png)
+
 When prompted, type yes and press Enter.
 
 As the code is being deployed, you will notice that the Terraform provisioner tries to connect to the EC2 instance and, once that connection is established, it will run the bootstrapping that was configured in the provisioner block against the instance.
 
 When complete, it will output the public IP for the Apache webserver as the Webserver-Public-IP value.
 
+![image](https://user-images.githubusercontent.com/44756128/116885825-edca7780-abed-11eb-8984-c772883bd2e2.png)
+
 Copy the IP address, paste it in a new browser window or tab, and press Enter.
 
 Verify that the web page displays as My Test Website With Help From Terraform Provisioner, validating that the provisioner within your code worked as intended: the commands configured in the provisioner code were issued and executed successfully on the EC2 instance that was created.
+
+![image](https://user-images.githubusercontent.com/44756128/116885871-00dd4780-abee-11eb-9a3d-128e2cae36d9.png)
+
+![image](https://user-images.githubusercontent.com/44756128/116885910-10f52700-abee-11eb-9104-9cb6374d08bc.png)
+
