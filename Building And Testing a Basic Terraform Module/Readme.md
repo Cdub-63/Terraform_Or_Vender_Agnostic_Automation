@@ -11,8 +11,6 @@ terraform version
 
 Since the Terraform version is returned, you have validated that the Terraform binary is installed and functioning properly.
 
-Note: If you receive a notification that there is a newer version of Terraform available, you can ignore it — the lab will run safely with the version installed on the VM.
-
 Create a new directory called terraform_project to house your Terraform code:
 ```sh
 mkdir terraform_project
@@ -32,6 +30,8 @@ Switch to the vpc directory using the absolute path:
 ```sh
 cd /home/cloud_user/terraform_project/modules/vpc/
 ```
+
+![image](https://user-images.githubusercontent.com/44756128/117156500-5dbe3680-ad83-11eb-8307-7e99ef1be966.png)
 
 # Write Your Terraform VPC Module Code
 Using Vim, create a new file called main.tf:
@@ -92,6 +92,8 @@ output "ami_id" {
 }
 ```
 
+![image](https://user-images.githubusercontent.com/44756128/117156962-cdccbc80-ad83-11eb-83a8-83ba967fd3bb.png)
+
 Note: The code in outputs.tf is critical to exporting values to your main Terraform code, where you'll be referencing this module. Specifically, it returns the subnet and AMI IDs for your EC2 instance.
 
 Press Escape and enter :wq to save and exit the file.
@@ -147,6 +149,8 @@ output "PrivateIP" {
 }
 ```
 
+![image](https://user-images.githubusercontent.com/44756128/117157399-2f8d2680-ad84-11eb-96ad-742a1085c8b8.png)
+
 Press Escape and enter :wq to save and exit the file.
 
 # Deploy Your Code and Test Out Your Module
@@ -172,6 +176,10 @@ Review the actions that will be performed when you deploy the Terraform code:
 terraform plan
 ```
 
+![image](https://user-images.githubusercontent.com/44756128/117157710-6feca480-ad84-11eb-882f-233d05900a6b.png)
+
+![image](https://user-images.githubusercontent.com/44756128/117157887-97dc0800-ad84-11eb-9e62-a74828d5c41e.png)
+
 In this case, it will create 3 resources, which includes the EC2 instance configured in the root code and any resources configured in the module. If you scroll up and view the resources that will be created, any resource with module.vpc in the name will be created via the module code, such as module.vpc.aws_vpc.this.
 
 Deploy the code:
@@ -188,11 +196,21 @@ View all of the resources that Terraform has created and is now tracking in the 
 terraform state list
 ```
 
+![image](https://user-images.githubusercontent.com/44756128/117158226-da054980-ad84-11eb-9da9-9eb6035d4f39.png)
+
+![image](https://user-images.githubusercontent.com/44756128/117158551-20f33f00-ad85-11eb-82fa-897ac0a82da8.png)
+
+![image](https://user-images.githubusercontent.com/44756128/117158612-30728800-ad85-11eb-9d49-bfc866268ea9.png)
+
+![image](https://user-images.githubusercontent.com/44756128/117158685-43855800-ad85-11eb-94ce-c8ce513cc76b.png)
+
 The list of resources should include your EC2 instance, which was configured and created by the main Terraform code, and 3 resources with module.vpc in the name, which were configured and created via the module code.
 
 Tear down the infrastructure you just created before moving on:
 ```sh
 terraform destroy
 ```
+
+![image](https://user-images.githubusercontent.com/44756128/117158922-7596ba00-ad85-11eb-838c-2b026f7c9e09.png)
 
 When prompted, type yes and press Enter.
