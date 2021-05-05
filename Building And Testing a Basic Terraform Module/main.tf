@@ -1,16 +1,19 @@
+variable "main_region" {
+  type    = string
+  default = "us-east-1"
+}
+
 provider "aws" {
-  region = var.region
+  region = var.main_region
 }
 
-resource "aws_vpc" "this" {
-  cidr_block = "10.0.0.0/16"
+module "vpc" {
+  source = "./modules/vpc"
+  region = var.main_region
 }
 
-resource "aws_subnet" "this" {
-  vpc_id     = aws_vpc.this.id
-  cidr_block = "10.0.1.0/24"
-}
-
-data "aws_ssm_parameter" "this" {
-  name = "/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2"
+resource "aws_instance" "my-instance" {
+  ami           = module.vpc.ami_id
+  subnet_id     = module.vpc.subnet_id
+  instance_type = "t2.micro"
 }
