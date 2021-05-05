@@ -211,6 +211,6 @@ Tear down the infrastructure you just created before moving on:
 terraform destroy
 ```
 
-![image](https://user-images.githubusercontent.com/44756128/117158922-7596ba00-ad85-11eb-838c-2b026f7c9e09.png)
-
 When prompted, type yes and press Enter.
+
+![image](https://user-images.githubusercontent.com/44756128/117158922-7596ba00-ad85-11eb-838c-2b026f7c9e09.png)
